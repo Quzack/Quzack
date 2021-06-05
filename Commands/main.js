@@ -6,9 +6,9 @@ const fs = require('fs');
 
 client.commands = new Discord.Collection();
 client.events = new Discord.Collection();
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'))
+const commandFiles = fs.readdirSync('./cmds/').filter(file => file.endsWith('.js'))
 for(const file of commandFiles){
-    const command = require(`./commands/${file}`);
+    const command = require(`./cmds/${file}`);
     client.commands.set(command.name, command);
 }
 
@@ -28,6 +28,7 @@ client.on('message', message => {
     else if(command === "verify"){client.commands.get('verify').execute(message,args,Discord)}
     else if(command === "ban"){client.commands.get('ban').execute(message,args,Discord)}
     else if(command === "ping"){client.commands.get('ping').execute(message,args,Discord,client)}
+    else if(command === "mute"){client.commands.get('mute').execute(message,args,Discord)}
 });
 
 client.login(token);
